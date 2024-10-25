@@ -8,7 +8,16 @@ public class Weapon : MonoBehaviour
     public int prefabId; // 프리펩 ID
     public float damage; // 데미지
     public int count; // 개수
-    public float speed; // 속도
+    public float speed; // 무기 속도
+
+    float timer;
+
+    Player player;
+
+    void Awake()
+    {
+        player = GetComponentInParent<Player>();    
+    }
 
     void Start()
     {
@@ -22,14 +31,19 @@ public class Weapon : MonoBehaviour
             case 0:
                 transform.Rotate(Vector3.back * speed * Time.deltaTime);
                 break;
-
             default:
+                timer += Time.deltaTime;
+
+                if (timer > speed) {
+                    timer = 0f;
+                    Fire();
+                }
                 break;
         }
 
         // Test Code..
         if (Input.GetButtonDown("Jump")) {
-            LevelUp(20, 5);
+            LevelUp(10, 2);
         }
     }
 
@@ -50,8 +64,8 @@ public class Weapon : MonoBehaviour
                 speed = 150;
                 Batch();
                 break;
-
             default:
+                speed = 0.3f;
                 break;
         }
     }
@@ -78,7 +92,23 @@ public class Weapon : MonoBehaviour
             bullet.Rotate(rotVec);
             bullet.Translate(bullet.up * 1.5f, Space.World);
 
-            bullet.GetComponent<Bullet>().Init(damage, -1); // -1 is Infinity Per.
+            bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero); // -1 is Infinity Per.
         }
+    }
+
+    void Fire()
+    {
+        if (!player.scanner.nearestTarget)
+            return;
+
+        // 총알이 나가야할 방향 계산
+        Vector3 targetPos = player.scanner.nearestTarget.position;
+        Vector3 dir = targetPos - transform.position;
+        dir = dir.normalized;
+
+        Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
+        bullet.position = transform.position;
+        bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+        bullet.GetComponent<Bullet>().Init(damage, count, dir);
     }
 }
