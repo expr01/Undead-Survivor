@@ -11,6 +11,7 @@ public class Item : MonoBehaviour
     public ItemData data;
     public int level;
     public Weapon weapon;
+    public Gear gear;
 
     Image icon;
     Text textLevel;
@@ -49,20 +50,28 @@ public class Item : MonoBehaviour
 
                     weapon.LevelUp(nextDamage, nextCount);
                 }
+                level++;
                 break;
-            
+
             case ItemData.ItemType.Glove:
-
-                break;
             case ItemData.ItemType.Shoe:
-
+                if (level == 0)
+                {
+                    GameObject newGear = new GameObject();
+                    gear = newGear.AddComponent<Gear>();
+                    gear.Init(data);
+                }
+                else {
+                    float nextRate = data.damages[level];
+                    gear.LevelUp(nextRate);
+                }
+                level++;
                 break;
             case ItemData.ItemType.Heal:
-
+                GameManager.instance.health = GameManager.instance.maxHealth;
                 break;
         }
 
-        level++;
         // 스크립트블 오브젝트에 작성한 레벨 데이터 개수를 넘기지 않게함
         if (level == data.damages.Length) {
             GetComponent<Button>().interactable = false;
