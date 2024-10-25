@@ -8750,6 +8750,55 @@ Transform:
   - {fileID: 557667054}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &180052248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 180052249}
+  - component: {fileID: 180052250}
+  m_Layer: 0
+  m_Name: Weapon 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &180052249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180052248}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1776666586}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &180052250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180052248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3814919c2a0c714cbda60971b34c826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  prefabId: 1
+  damage: 11
+  count: 2
+  speed: 0
 --- !u!1 &258267757
 GameObject:
   m_ObjectHideFlags: 0
@@ -8960,8 +9009,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 7548430069789600074, guid: 53331a3ab68520240bcaf0139acbc874, type: 3}
   - {fileID: 374493484410067223, guid: c66802486f255894e877b6769f48d8d2, type: 3}
+  - {fileID: 3451328504215278885, guid: 4564052796d4b29418388b11f17a4b02, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -9070,7 +9119,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 12.777778
+  orthographic size: 8.18
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -13763,6 +13812,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcff0704e2c4a4f439a17d32fb6e5c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameTime: 0
+  maxGameTime: 20
   pool: {fileID: 419240371}
   player: {fileID: 1776666589}
 --- !u!1 &1092410596
@@ -13855,6 +13906,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: []
+  spawnData:
+  - spriteType: 0
+    spawnTime: 0.7
+    health: 10
+    speed: 1.5
+  - spriteType: 1
+    spawnTime: 0.2
+    health: 15
+    speed: 2.4
 --- !u!1 &1177364615
 GameObject:
   m_ObjectHideFlags: 0
@@ -18643,6 +18703,7 @@ Transform:
   - {fileID: 1607262845}
   - {fileID: 1177364616}
   - {fileID: 1150791164}
+  - {fileID: 180052249}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1776666588
