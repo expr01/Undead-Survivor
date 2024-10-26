@@ -16,11 +16,14 @@ public class Weapon : MonoBehaviour
 
     void Awake()
     {
-        player = GameManager.instance.player;   
+        player = GameManager.instance.player;
     }
 
     void Update()
     {
+        if (!GameManager.instance.isLive)
+            return;
+
         switch (id)
         {
             case 0:

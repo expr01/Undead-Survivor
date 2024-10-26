@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -24,6 +25,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (!GameManager.instance.isLive)
+            return;
+
         inputVec.x = Input.GetAxisRaw("Horizontal");
         inputVec.y = Input.GetAxisRaw("Vertical");
     }
@@ -31,6 +35,9 @@ public class Player : MonoBehaviour
     // fixedUpdate 고정 프레임
     void FixedUpdate()
     {
+        if (!GameManager.instance.isLive)
+            return;
+
         // normalized를 통해 모든 방향으로 크기 1 고정, fixedDeltaTime은 물리프레임 하나가 소비한 시간
         Vector2 nextVec = inputVec.normalized * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec);
@@ -38,6 +45,9 @@ public class Player : MonoBehaviour
 
     void LateUpdate()
     {
+        if (!GameManager.instance.isLive)
+            return;
+
         anim.SetFloat("Speed", inputVec.magnitude);
 
         if (inputVec.x != 0) {
