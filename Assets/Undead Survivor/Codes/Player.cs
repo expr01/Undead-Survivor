@@ -53,6 +53,23 @@ public class Player : MonoBehaviour
         if (inputVec.x != 0) {
             spriter.flipX = inputVec.x < 0; // 좌측 키 눌렀을 때 true
         }
+    }
 
+    // 플레이어와 몬스터가 충돌하고 있을 때
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (!GameManager.instance.isLive)
+            return;
+
+        GameManager.instance.health -= Time.deltaTime * 10;
+
+        if (GameManager.instance.health < 0) {
+            for (int index = 2; index < transform.childCount; index++) {
+                transform.GetChild(index).gameObject.SetActive(false);
+            }
+
+            anim.SetTrigger("Dead");
+            GameManager.instance.GameOver();
+        }
     }
 }
